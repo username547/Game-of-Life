@@ -55,6 +55,7 @@ int main() {
         if ((c == '-' || c == '_') && speed > 50000) {
             speed -= 10000;
         }
+        int temp = rand() % 2;
 
         usleep(speed);
     }
