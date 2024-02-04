@@ -14,9 +14,10 @@ int countNeighbors(int **matrix, int n, int m, int currentI, int currentJ);
 int getNext(int current, int neighbors);
 char getChar(int x);
 int generateConf(int n, int m, char *filename);
+int gameOver(int **matrix, int n, int m);
 
 int main() {
-    int n = 25, m = 80, game = 1, speed = 100000;
+    int n = 25, m = 80, speed = 100000;
     char *filename = "position.txt";
     int **matrix = createMatrix(n, m);
     char c;
@@ -45,7 +46,7 @@ int main() {
         updateFrame(matrix, n, m);
         drawFrame(matrix, n, m);
 
-        if (c == 'q' || c == 'Q') {
+        if (c == 'q' || c == 'Q' || gameOver(matrix, n, m)) {
             break;
         }
         if ((c == '+' || c == '=') && speed < 300000) {
@@ -169,5 +170,16 @@ int generateConf(int n, int m, char *filename) {
         }
     }
     fclose(file);
+    return 1;
+}
+
+int gameOver(int **matrix, int n, int m) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] == 1) {
+                return 0;
+            }
+        }
+    }
     return 1;
 }
